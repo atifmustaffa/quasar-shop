@@ -12,10 +12,10 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          Quasar Shop
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <Cart :cart="cart"></Cart>
       </q-toolbar>
     </q-header>
 
@@ -38,7 +38,9 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <keep-alive>
+        <router-view />
+      </keep-alive>
     </q-page-container>
   </q-layout>
 </template>
@@ -46,6 +48,7 @@
 <script>
 import { date } from "quasar";
 import EssentialLink from "components/EssentialLink.vue";
+import Cart from "components/Cart.vue";
 
 const linksData = [
   {
@@ -70,13 +73,19 @@ const linksData = [
 ];
 
 export default {
-  name: 'MainLayout',
-  components: { EssentialLink },
-  data () {
+  name: "MainLayout",
+  components: { EssentialLink, Cart },
+  data() {
     return {
       leftDrawerOpen: false,
-      essentialLinks: linksData
-    }
+      essentialLinks: linksData,
+      cart: [
+        {
+          product_id: 12,
+          variation_id: 33
+        }
+      ]
+    };
   }
-}
+};
 </script>
