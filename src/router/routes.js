@@ -6,7 +6,12 @@ const routes = [
       { path: "", redirect: "/shop" },
       { path: "/shop", component: () => import("src/pages/Shop.vue") },
       { path: "/cart", component: () => import("src/pages/Cart.vue") },
-      { path: "/help", component: () => import("src/pages/Help.vue") }
+      { path: "/help", component: () => import("src/pages/Help.vue") },
+      {
+        path: "/product/:id",
+        component: () => import("src/pages/Product.vue"),
+        props: true
+      }
     ]
   },
 
