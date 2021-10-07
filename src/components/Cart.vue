@@ -1,7 +1,7 @@
 <template>
   <div>
-    <q-btn dense round flat icon="shopping_cart">
-      <q-badge color="orange" floating transparent>
+    <q-btn dense round flat icon="shopping_cart" to="/cart">
+      <q-badge color="accent" floating transparent>
         {{ cart.length }}
       </q-badge>
     </q-btn>
