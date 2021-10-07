@@ -1,19 +1,21 @@
-
 const routes = [
   {
-    path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    path: "/",
+    component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: '', component: () => import('pages/Index.vue') }
+      { path: "", redirect: "/shop" },
+      { path: "/shop", component: () => import("src/pages/Shop.vue") },
+      { path: "/cart", component: () => import("src/pages/Cart.vue") },
+      { path: "/help", component: () => import("src/pages/Help.vue") }
     ]
   },
 
   // Always leave this as last one,
   // but you can also remove it
   {
-    path: '*',
-    component: () => import('pages/Error404.vue')
+    path: "*",
+    component: () => import("pages/Error404.vue")
   }
-]
+];
 
-export default routes
+export default routes;
