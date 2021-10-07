@@ -1,36 +1,27 @@
 <template>
-  <q-page padding class="page fit row inline justify-center">
+  <q-page padding class="bg-grey-3 fit row inline justify-center">
     <q-card
       flat
       bordered
-      class="my-card bg-grey-1"
-      v-for="(product, index) in products"
+      v-ripple
+      class="my-card q-ma-xs"
+      v-for="product in products"
       v-bind:key="product.id"
       v-bind="product"
+      @click="openProduct(product.id)"
     >
-      <q-card-section>
-        <q-carousel
-          v-model="slides[index]"
-          animated
-          swipeable
-          arrows
-          navigation
-          infinite
-        >
-          <q-carousel-slide
-            v-for="(image, i) in product.images"
-            v-bind:key="i"
-            class="carousel-slide"
-            :name="i"
-            :img-src="image"
-          />
-        </q-carousel>
+      <q-card-section class="thumbnail-container flex center">
+        <q-img
+          class="product-thumbnail"
+          :src="product.images[0]"
+          img-class="thumbnail-img"
+        ></q-img>
       </q-card-section>
 
       <q-card-section>
         <div class="row items-center no-wrap">
           <div class="col">
-            <div class="text-subtitle1">
+            <div class="text-subtitle2 ellipsis-2-lines">
               {{ product.brand }} {{ product.name }}
             </div>
             <div class="product-price text-subtitle1 text-weight-bold">
@@ -39,13 +30,6 @@
           </div>
         </div>
       </q-card-section>
-
-      <q-separator />
-
-      <q-card-actions class="justify-evenly">
-        <q-btn flat icon="share">Share</q-btn>
-        <q-btn flat icon="add_shopping_cart">Add to cart</q-btn>
-      </q-card-actions>
     </q-card>
 
     <q-page-scroller
@@ -69,33 +53,33 @@ export default {
       slides: Array(products.length).fill(1)
     };
   },
-  computed: {
-    title() {
-      return "";
+  methods: {
+    openProduct(id) {
+      this.$router.push("/product/" + id);
     }
   }
 };
 </script>
 
 <style lang="scss">
-.page {
-  background-color: #ededed;
-}
 .my-card {
-  margin: 0.5em;
   width: 100%;
+  max-width: 180px;
+  cursor: pointer;
 }
-.carousel-slide {
-  background-repeat: no-repeat;
-  background-size: contain;
+.thumbnail-container {
+  height: 180px;
 }
 .product-price {
   color: $primary;
 }
-
+.thumbnail-img {
+  /* Temporary */
+  background-size: contain !important;
+}
 @media screen and (min-width: 500px) {
   .my-card {
-    max-width: 300px;
+    max-width: 200px;
   }
 }
 </style>
