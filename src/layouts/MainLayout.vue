@@ -55,20 +55,20 @@ const linksData = [
     title: "Shop",
     caption: "Browse items",
     icon: "shopping_bag",
-    link: "/"
+    link: "/shop"
   },
   {
     title: "Cart",
     caption: "Manage items in cart",
     icon: "shopping_cart",
-    link: "/",
+    link: "/cart",
     separator: true
   },
   {
     title: "Help",
     caption: "Services and information",
     icon: "help",
-    link: "/"
+    link: "/help"
   }
 ];
 
