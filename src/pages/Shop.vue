@@ -43,11 +43,8 @@
 </template>
 
 <script>
-import axios from "axios";
 import { join } from "path";
-
-const BASE_API = "api";
-const PRODUCTS_PATH = "products";
+import api from "../helper/api";
 
 export default {
   name: "PageShop",
@@ -63,17 +60,15 @@ export default {
   },
   mounted() {
     // Once the page load and loaded to DOM
-    let productsApi = join(BASE_API, PRODUCTS_PATH);
-    axios
-      .get(productsApi)
-      .then(response => {
-        if (response.status === 200) {
-          this.products = response.data;
-        }
-      })
-      .catch(err => {
+    api.getProducts(
+      products => {
+        this.products = products;
+      },
+      err => {
+        // Handles error or notify
         console.log("There's an error fetching products", err);
-      });
+      }
+    );
   }
 };
 </script>

@@ -63,11 +63,7 @@
 </template>
 
 <script>
-import axios from "axios";
-import { join } from "path";
-
-const BASE_API = "api";
-const PRODUCTS_PATH = "products";
+import api from "../helper/api";
 
 export default {
   name: "PageProduct",
@@ -80,10 +76,8 @@ export default {
   },
   computed: {
     title() {
-      if (!this.product.brand) {
-        return "Product";
-      }
-      return this.product.brand + " " + this.product.name;
+      return `${this.product.brand || "Brand"} ${this.product.name ||
+        "Product"}`;
     }
   },
   methods: {
@@ -95,25 +89,23 @@ export default {
       this.slide = 0;
     },
     getProduct(id) {
-      let productApi = join(BASE_API, PRODUCTS_PATH, id);
-      axios
-        .get(productApi)
-        .then(response => {
-          if (response.status === 200) {
-            this.product = response.data;
-
-            // Reset carousel slide back
-            this.resetSlide();
-          }
-        })
-        .catch(err => {
+      api.getProduct(
+        id,
+        product => {
+          this.product = product;
+          this.slide = 0;
+        },
+        err => {
+          // Handles error or notify
           console.log("There's an error fetching product:", id, err);
-        });
+        }
+      );
     }
   },
   mounted() {
     // Once loaded in DOM
     this.getProduct(this.id);
+    console.log();
   },
   watch: {
     id(newVal, oldVal) {
