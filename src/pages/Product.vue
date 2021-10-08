@@ -1,7 +1,16 @@
 <template>
-  <div>
-    <div>
-      <q-carousel v-model="slide" animated swipeable arrows navigation infinite>
+  <div class="row justify-center product-container">
+    <!-- Image -->
+    <div class="col-xs-12 col-sm-6 col-md-4">
+      <q-carousel
+        v-model="slide"
+        animated
+        swipeable
+        arrows
+        navigation
+        infinite
+        class="carousel-container"
+      >
         <q-carousel-slide
           v-for="(image, i) in product.images"
           v-bind:key="i"
@@ -12,52 +21,51 @@
       </q-carousel>
     </div>
 
-    <div class="q-pa-md">
-      <div class="row items-center no-wrap">
-        <div class="col">
-          <div class="text-h6 ellipsis-4-lines">
-            {{ title }}
-          </div>
-          <div class="product-price text-h6">
-            {{ $n(product.price || 0.0, "currency") }}
-          </div>
-          <q-separator />
-          <div class="product-description text-body1 q-my-sm">
-            <q-expansion-item
-              default-opened
-              header-class="expansion-header"
-              label="Description"
-            >
-              <q-card>
-                <q-card-section horizontal>
-                  {{
-                    product.description ? product.description : "description"
-                  }}
-                </q-card-section>
-              </q-card>
-            </q-expansion-item>
-          </div>
-        </div>
+    <!-- Product details -->
+    <div class="col-xs-12 col-sm-6 col-md-4 q-pa-md">
+      <div class="text-h6 ellipsis-4-lines">
+        {{ title }}
       </div>
+      <div class="product-price text-h6">
+        {{ $n(product.price || 0.0, "currency") }}
+      </div>
+      <q-separator />
+      <div class="product-description text-body1 q-my-sm">
+        <q-expansion-item
+          default-opened
+          header-class="expansion-header"
+          label="Description"
+        >
+          <q-card>
+            <q-card-section horizontal>
+              {{ product.description ? product.description : "description" }}
+            </q-card-section>
+          </q-card>
+        </q-expansion-item>
+      </div>
+    </div>
 
-      <q-footer bordered class="footer">
-        <q-btn-group spread>
-          <q-btn
-            class="q-py-xs"
-            color="primary"
-            label="Share"
-            icon="share"
-            @click="share"
-          />
-          <q-btn
-            class="q-py-xs"
-            color="primary"
-            label="Add to cart"
-            icon="add_shopping_cart"
-            @click="addToCart(id)"
-          />
-        </q-btn-group>
-      </q-footer>
+    <!-- Button groups -->
+    <div class="col-xs-12 col-sm-12 col-md-4 q-pa-md">
+      <div>
+        <q-btn
+          color="primary"
+          label="Add to cart"
+          icon="add_shopping_cart"
+          style="width: 100%;"
+          @click="addToCart(id)"
+        />
+      </div>
+      <div class="q-mt-sm">
+        <q-btn
+          stretch
+          color="primary"
+          label="Share"
+          icon="share"
+          style="width: 100%;"
+          @click="share"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -116,6 +124,9 @@ export default {
 };
 </script>
 <style lang="scss">
+.carousel-container {
+  padding: 16px;
+}
 .carousel-slide {
   background-size: contain;
   background-repeat: no-repeat;
@@ -128,5 +139,9 @@ export default {
 }
 .footer {
   background-color: #fff;
+}
+.product-container {
+  max-width: 1024px;
+  margin: auto;
 }
 </style>
