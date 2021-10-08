@@ -70,15 +70,12 @@ export default {
   props: ["id"],
   data() {
     return {
-      product: products.find(p => p.id === +this.id),
       slide: 0
     };
   },
-  watch: {
-    id: function(newVal, oldVal) {
-      // Watch for id from route changes
-      this.product = products.find(p => p.id === +newVal);
-      this.slide = 0;
+  computed: {
+    product() {
+      return products.find(p => p.id === +this.id);
     }
   },
   methods: {
