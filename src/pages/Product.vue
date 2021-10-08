@@ -42,12 +42,19 @@
 
       <q-footer bordered class="footer">
         <q-btn-group spread>
-          <q-btn class="q-py-xs" color="primary" label="Share" icon="share" />
+          <q-btn
+            class="q-py-xs"
+            color="primary"
+            label="Share"
+            icon="share"
+            @click="share"
+          />
           <q-btn
             class="q-py-xs"
             color="primary"
             label="Add to cart"
             icon="add_shopping_cart"
+            @click="addToCart(id)"
           />
         </q-btn-group>
       </q-footer>
@@ -72,6 +79,12 @@ export default {
       // Watch for id from route changes
       this.product = products.find(p => p.id === +newVal);
       this.slide = 0;
+    }
+  },
+  methods: {
+    share() {},
+    addToCart(id) {
+      this.$store.dispatch("cartModule/addToCart", id);
     }
   }
 };
