@@ -96,29 +96,26 @@ export default {
     resetSlide() {
       this.slide = 0;
     },
-    getProduct(id) {
-      api.getProduct(
-        id,
-        product => {
+    setProduct(id) {
+      api
+        .getProduct(id)
+        .then(product => {
           this.product = product;
-          this.slide = 0;
-        },
-        err => {
+        })
+        .catch(err => {
           // Handles error or notify
           console.log("There's an error fetching product:", id, err);
-        }
-      );
+        });
     }
   },
   mounted() {
     // Once loaded in DOM
-    this.getProduct(this.id);
-    console.log();
+    this.setProduct(this.id);
   },
   watch: {
     id(newVal, oldVal) {
       // Each time component is called with new id prop
-      this.getProduct(newVal);
+      this.setProduct(newVal);
     }
   }
 };

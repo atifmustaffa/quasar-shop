@@ -17,17 +17,11 @@ const helper = {
         .catch(reject)
     );
   },
-  getProducts(callback, error) {
-    helper
-      .get(join(BASE_API, PRODUCTS_PATH))
-      .then(callback)
-      .catch(error);
+  getProducts() {
+    return helper.get(join(BASE_API, PRODUCTS_PATH));
   },
-  getProduct(id, callback, error) {
-    helper
-      .get(join(BASE_API, PRODUCTS_PATH, String(id)))
-      .then(callback)
-      .catch(error);
+  getProduct(id) {
+    return helper.get(join(BASE_API, PRODUCTS_PATH, String(id)));
   }
 };
 export default helper;

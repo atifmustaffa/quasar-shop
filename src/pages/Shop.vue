@@ -60,15 +60,15 @@ export default {
   },
   mounted() {
     // Once the page load and loaded to DOM
-    api.getProducts(
-      products => {
+    api
+      .getProducts()
+      .then(products => {
         this.products = products;
-      },
-      err => {
+      })
+      .catch(err => {
         // Handles error or notify
         console.log("There's an error fetching products", err);
-      }
-    );
+      });
   }
 };
 </script>
