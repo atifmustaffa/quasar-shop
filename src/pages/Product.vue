@@ -16,10 +16,10 @@
       <div class="row items-center no-wrap">
         <div class="col">
           <div class="text-h6 ellipsis-4-lines">
-            {{ product.brand }} {{ product.name }}
+            {{ title }}
           </div>
           <div class="product-price text-h6">
-            {{ product.price }}
+            {{ $n(product.price, "currency") }}
           </div>
           <q-separator />
           <div class="product-description text-body1 q-my-sm">
@@ -76,6 +76,9 @@ export default {
   computed: {
     product() {
       return products.find(p => p.id === +this.id);
+    },
+    title() {
+      return this.product.brand + " " + this.product.name;
     }
   },
   methods: {

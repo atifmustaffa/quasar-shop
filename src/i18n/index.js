@@ -1,5 +1,13 @@
-import enUS from './en-us'
+import enUSmsg from "./en-us/messages";
+import enUSdateTimeFormats from "./en-us/dateTimeFormats";
+import enUSnumberFormats from "./en-us/numberFormats";
 
-export default {
-  'en-us': enUS
-}
+export const messages = {
+  "en-us": enUSmsg
+};
+export const dateTimeFormats = {
+  "en-us": enUSdateTimeFormats
+};
+export const numberFormats = {
+  "en-us": enUSnumberFormats
+};
