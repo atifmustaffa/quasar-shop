@@ -68,16 +68,17 @@ export default {
   props: ["id"],
   data() {
     return {
-      // TODO Retrieve from back-end.
-      product: {},
       slide: 0
     };
   },
-  watch: {
-    id: function(newVal, oldVal) {
+  computed: {
+    product() {
       // Watch for id from route changes
       // TODO Retrieve from back-end.
-      (this.product = {}), (this.slide = 0);
+      return {};
+    },
+    title() {
+      return this.product.brand + " " + this.product.name;
     }
   },
   methods: {
