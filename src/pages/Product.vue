@@ -23,15 +23,34 @@
           </div>
           <q-separator />
           <div class="product-description text-body1 q-my-sm">
-            {{ product.description ? product.description : "description" }}
+            <q-expansion-item
+              default-opened
+              header-class="expansion-header"
+              label="Description"
+            >
+              <q-card>
+                <q-card-section horizontal>
+                  {{
+                    product.description ? product.description : "description"
+                  }}
+                </q-card-section>
+              </q-card>
+            </q-expansion-item>
           </div>
         </div>
       </div>
 
-      <div class="flex justify-evenly q-my-sm">
-        <q-btn color="primary" icon="share">Share</q-btn>
-        <q-btn color="primary" icon="add_shopping_cart">Add to cart</q-btn>
-      </div>
+      <q-footer bordered class="footer">
+        <q-btn-group spread>
+          <q-btn class="q-py-xs" color="primary" label="Share" icon="share" />
+          <q-btn
+            class="q-py-xs"
+            color="primary"
+            label="Add to cart"
+            icon="add_shopping_cart"
+          />
+        </q-btn-group>
+      </q-footer>
     </div>
   </div>
 </template>
@@ -64,5 +83,11 @@ export default {
 }
 .product-price {
   color: $primary;
+}
+.expansion-header {
+  padding: 0;
+}
+.footer {
+  background-color: #fff;
 }
 </style>
