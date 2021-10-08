@@ -43,19 +43,37 @@
 </template>
 
 <script>
+import axios from "axios";
+import { join } from "path";
+
+const BASE_API = "api";
+const PRODUCTS_PATH = "products";
+
 export default {
   name: "PageShop",
   data() {
     return {
-      // TODO Retrieve from back-end.
-      products: [],
-      slides: []
+      products: []
     };
   },
   methods: {
     openProduct(id) {
-      this.$router.push("/product/" + id);
+      this.$router.push(join("product", String(id)));
     }
+  },
+  mounted() {
+    // Once the page load and loaded to DOM
+    let productsApi = join(BASE_API, PRODUCTS_PATH);
+    axios
+      .get(productsApi)
+      .then(response => {
+        if (response.status === 200) {
+          this.products = response.data;
+        }
+      })
+      .catch(err => {
+        console.log("There's an error fetching products", err);
+      });
   }
 };
 </script>

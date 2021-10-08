@@ -19,7 +19,7 @@
             {{ title }}
           </div>
           <div class="product-price text-h6">
-            {{ $n(product.price, "currency") }}
+            {{ $n(product.price || 0.0, "currency") }}
           </div>
           <q-separator />
           <div class="product-description text-body1 q-my-sm">
@@ -63,21 +63,26 @@
 </template>
 
 <script>
+import axios from "axios";
+import { join } from "path";
+
+const BASE_API = "api";
+const PRODUCTS_PATH = "products";
+
 export default {
   name: "PageProduct",
   props: ["id"],
   data() {
     return {
+      product: {},
       slide: 0
     };
   },
   computed: {
-    product() {
-      // Watch for id from route changes
-      // TODO Retrieve from back-end.
-      return {};
-    },
     title() {
+      if (!this.product.brand) {
+        return "Product";
+      }
       return this.product.brand + " " + this.product.name;
     }
   },
@@ -85,6 +90,35 @@ export default {
     share() {},
     addToCart(id) {
       this.$store.dispatch("cartModule/addToCart", id);
+    },
+    resetSlide() {
+      this.slide = 0;
+    },
+    getProduct(id) {
+      let productApi = join(BASE_API, PRODUCTS_PATH, id);
+      axios
+        .get(productApi)
+        .then(response => {
+          if (response.status === 200) {
+            this.product = response.data;
+
+            // Reset carousel slide back
+            this.resetSlide();
+          }
+        })
+        .catch(err => {
+          console.log("There's an error fetching product:", id, err);
+        });
+    }
+  },
+  mounted() {
+    // Once loaded in DOM
+    this.getProduct(this.id);
+  },
+  watch: {
+    id(newVal, oldVal) {
+      // Each time component is called with new id prop
+      this.getProduct(newVal);
     }
   }
 };
