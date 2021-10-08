@@ -63,22 +63,21 @@
 </template>
 
 <script>
-import products from "../mock_products";
-
 export default {
   name: "PageProduct",
   props: ["id"],
   data() {
     return {
+      // TODO Retrieve from back-end.
+      product: {},
       slide: 0
     };
   },
-  computed: {
-    product() {
-      return products.find(p => p.id === +this.id);
-    },
-    title() {
-      return this.product.brand + " " + this.product.name;
+  watch: {
+    id: function(newVal, oldVal) {
+      // Watch for id from route changes
+      // TODO Retrieve from back-end.
+      (this.product = {}), (this.slide = 0);
     }
   },
   methods: {
