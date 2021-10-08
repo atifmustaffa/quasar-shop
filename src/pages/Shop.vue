@@ -43,14 +43,13 @@
 </template>
 
 <script>
-import products from "../mock_products";
-
 export default {
   name: "PageShop",
   data() {
     return {
-      products,
-      slides: Array(products.length).fill(1)
+      // TODO Retrieve from back-end.
+      products: [],
+      slides: []
     };
   },
   methods: {
