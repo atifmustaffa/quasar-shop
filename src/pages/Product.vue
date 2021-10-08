@@ -26,11 +26,11 @@
       <div class="text-h6 ellipsis-4-lines">
         {{ title }}
       </div>
-      <div class="product-price text-h6">
+      <div class="product-price text-h6 q-my-md">
         {{ $n(product.price || 0.0, "currency") }}
       </div>
       <q-separator />
-      <div class="product-description text-body1 q-my-sm">
+      <div class="product-description text-body1 q-mt-md">
         <q-expansion-item
           default-opened
           header-class="expansion-header"
