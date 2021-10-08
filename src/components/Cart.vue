@@ -2,7 +2,7 @@
   <div>
     <q-btn dense round flat icon="shopping_cart" to="/cart">
       <q-badge color="accent" floating transparent>
-        {{ cart.length }}
+        {{ itemCount }}
       </q-badge>
     </q-btn>
   </div>
@@ -11,10 +11,9 @@
 <script>
 export default {
   name: "Cart",
-  props: {
-    cart: {
-      type: Array,
-      required: true
+  computed: {
+    itemCount() {
+      return this.$store.getters["cartModule/getLength"];
     }
   }
 };

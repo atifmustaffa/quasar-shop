@@ -15,7 +15,7 @@
           Quasar Shop
         </q-toolbar-title>
 
-        <Cart :cart="cart"></Cart>
+        <Cart></Cart>
       </q-toolbar>
     </q-header>
 
@@ -46,7 +46,6 @@
 </template>
 
 <script>
-import { date } from "quasar";
 import EssentialLink from "components/EssentialLink.vue";
 import Cart from "components/Cart.vue";
 
@@ -78,13 +77,7 @@ export default {
   data() {
     return {
       leftDrawerOpen: false,
-      essentialLinks: linksData,
-      cart: [
-        {
-          product_id: 12,
-          variation_id: 33
-        }
-      ]
+      essentialLinks: linksData
     };
   }
 };
