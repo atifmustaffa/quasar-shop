@@ -1,5 +1,10 @@
 <template>
-  <div class="row q-mt-sm flex-center" v-if="valid">
+  <div
+    v-ripple
+    class="row q-mt-sm flex-center relative-position"
+    v-if="valid"
+    @click="openProduct(product.id)"
+  >
     <div class="col-3">
       <q-img
         class="product-thumbnail"
@@ -20,6 +25,7 @@
 </template>
 
 <script>
+import { join } from "path";
 import api from "../helper/api";
 
 export default {
@@ -36,6 +42,11 @@ export default {
     return {
       product: {}
     };
+  },
+  methods: {
+    openProduct(id) {
+      this.$router.push(join("product", String(id)));
+    }
   },
   computed: {
     valid() {
