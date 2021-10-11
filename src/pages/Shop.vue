@@ -25,7 +25,7 @@
               {{ product.brand }} {{ product.name }}
             </div>
             <div class="product-price text-subtitle1 text-weight-bold">
-              {{ product.price }}
+              {{ $n(product.price || 0.0, "currency") }}
             </div>
           </div>
         </div>
